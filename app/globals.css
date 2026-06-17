@@ -1,26 +1,64 @@
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tailwindcss"; 
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* --- 1. Global Defaults --- */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f0; /* Matches the clean neal.fun hub background */
+  color: #1f2937;
+}
+
+/* --- 2. Custom Font Utility --- */
+/* By defining this here, we don't need a tailwind.config.ts file at all.
+   It hooks into the Next.js font variable we set in layout.tsx */
+.font-pixel {
+  font-family: var(--font-pixel), 'Courier New', Courier, monospace;
+}
+
+/* --- 3. Custom Pixel Art Slider --- */
+.pixel-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+/* The White Pill Track */
+.pixel-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 24px;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  border-radius: 9999px; /* Creates the pill shape */
+}
+
+/* The Blue Thumb with 3 Lines */
+.pixel-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 36px;
+  width: 48px;
+  background-color: #60a5fa;
+  border: 3px solid #1e293b;
+  border-radius: 8px;
+  margin-top: -9px; /* Centers the thumb vertically on the track */
+  cursor: pointer;
+  
+  /* Drawing the 3 vertical lines exactly like your reference image */
+  background-image: 
+    linear-gradient(to right, #1e293b 2px, transparent 2px),
+    linear-gradient(to right, #1e293b 2px, transparent 2px),
+    linear-gradient(to right, #1e293b 2px, transparent 2px);
+  background-size: 2px 14px;
+  background-repeat: no-repeat;
+  background-position: 14px center, 21px center, 28px center;
+}
+
+/* Remove default focus outline for a cleaner look */
+.pixel-slider:focus {
+  outline: none;
+}
+
+/* Add a slight hover effect to the thumb */
+.pixel-slider::-webkit-slider-thumb:hover {
+  background-color: #3b82f6;
 }
