@@ -1,13 +1,11 @@
+import { Metadata } from 'next';
 import TrafficGame from '@/components/TrafficGame';
-import Link from 'next/link';
 
-export default function TrafficRunPage() {
-  return (
-    <div className="min-h-screen bg-slate-800 flex flex-col items-center py-10">
-      <Link href="/" className="text-white mb-6 hover:underline font-mono">
-        &larr; Back to Hub
-      </Link>
-      <TrafficGame />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: 'Traffic Run | Retro Highway Dodge',
+  description: 'Master the lanes in Traffic Run, a fast-paced pixel art highway dodger. Can you beat the global high score?',
+};
+
+export default function Page() {
+  return <TrafficGame />;
 }
