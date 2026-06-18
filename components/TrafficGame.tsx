@@ -35,6 +35,9 @@ export default function TrafficGame() {
   const audioRefs = useRef<{ music?: HTMLAudioElement; explosion?: HTMLAudioElement; gameover?: HTMLAudioElement; button?: HTMLAudioElement; }>({});
 
   const playerPosRef = useRef(50);
+  const playerVelocityRef = useRef(0); // Steering velocity for friction/momentum
+  const playerAccelerationRef = useRef(0.6); // How fast steering accelerates
+  const playerFrictionRef = useRef(0.82); // Friction coefficient (lower = more friction)
   const gameStateRef = useRef({ frames: 0, score: 0, enemies: [] as Enemy[], gameOver: false, crashFrame: 0, crashTimer: 0, gameOverSoundPlayed: false });
 
   // FIX 1 cont: Run local storage checks ONLY after the first render
@@ -107,6 +110,66 @@ export default function TrafficGame() {
     };
   }, [hasInteracted, isMusicOn]);
 
+  // Keyboard steering control with friction/momentum
+  useEffect(() => {
+    const keysPressed = { ArrowLeft: false, ArrowRight: false };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        keysPressed.ArrowLeft = true;
+        e.preventDefault();
+      } else if (e.key === 'ArrowRight') {
+        keysPressed.ArrowRight = true;
+        e.preventDefault();
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        keysPressed.ArrowLeft = false;
+        e.preventDefault();
+      } else if (e.key === 'ArrowRight') {
+        keysPressed.ArrowRight = false;
+        e.preventDefault();
+      }
+    };
+
+    // Apply steering input each frame
+    const updateSteering = () => {
+      if (keysPressed.ArrowLeft) {
+        playerVelocityRef.current = Math.max(playerVelocityRef.current - playerAccelerationRef.current, -3); // Cap max speed
+      } else if (keysPressed.ArrowRight) {
+        playerVelocityRef.current = Math.min(playerVelocityRef.current + playerAccelerationRef.current, 3); // Cap max speed
+      } else {
+        // Apply friction when no keys pressed
+        playerVelocityRef.current *= playerFrictionRef.current;
+      }
+
+      // Update position with velocity
+      playerPosRef.current += playerVelocityRef.current;
+
+      // Clamp to bounds [0, 100]
+      playerPosRef.current = Math.max(0, Math.min(100, playerPosRef.current));
+    };
+
+    // Run steering update every frame (tied to animation frame)
+    let animId: number;
+    const steeringLoop = () => {
+      updateSteering();
+      animId = requestAnimationFrame(steeringLoop);
+    };
+    animId = requestAnimationFrame(steeringLoop);
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   // Cleanup audio completely when leaving the page
   useEffect(() => {
     return () => {
@@ -138,7 +201,7 @@ export default function TrafficGame() {
 
     // --- LOAD IMAGES ---
     const imgCarMain = new Image(); imgCarMain.src = '/sprites/traffic-run/car_main.png';
-    const imgExplosion = new Image(); imgExplosion.src = '/sprites/traffic-run/explosion.png';
+    const imgExplosion = new Image(); imgExplosion.src = '/sprites/traffic-run/Explosion.png';
     const imgBg = new Image(); imgBg.src = '/sprites/traffic-run/bg.png';
     const carImgs = [1, 2, 3, 4].map(i => { const img = new Image(); img.src = `/sprites/traffic-run/car_${i}.png`; return img; });
     const truckImgs = [1, 2, 3, 4].map(i => { const img = new Image(); img.src = `/sprites/traffic-run/truck_${i}.png`; return img; });
@@ -399,7 +462,13 @@ export default function TrafficGame() {
       }
     }
   };
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => { handleInteraction(); playerPosRef.current = Number(e.target.value); };
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    handleInteraction(); 
+    // Set position and velocity for smooth slider interaction
+    const newPos = Number(e.target.value);
+    playerPosRef.current = newPos;
+    playerVelocityRef.current = 0; // Stop momentum when slider is used
+  };
 
   const submitScore = async (name: string, scoreToSubmit: number, totalFrames: number) => {
     setIsSubmitting(true);

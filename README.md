@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="public/logo.png" alt="KillTime Logo" width="150"/>
+  <h1>KillTime</h1>
+  <p><strong>A collection of uselessly fun things to help you kill time.</strong></p>
+  
+  [![Website](https://img.shields.io/badge/Website-killtime.vercel.app-blue?style=for-the-badge&logo=vercel)](https://killtime.vercel.app)
+</div>
 
-## Getting Started
+<br />
 
-First, run the development server:
+<div align="center">
+  <img src="public/ss.png" alt="KillTime Screenshot" width="800" style="border-radius: 12px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);"/>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎮 The Games
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Currently, KillTime features two highly addictive mini-games:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **🚗 Traffic Run:** A fast-paced, 8-bit retro highway dodger built entirely in HTML5 Canvas. Features scaling difficulty, responsive pixel-art UI, audio controls, and a real-time **Global Leaderboard**.
+*   **💸 Spend Elon's Fortune:** A neo-brutalist shopping simulator. Try to blow through a $250,000,000,000 net worth by buying everything from a cup of coffee to the entire GDP of New Zealand.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*   **Framework:** [Next.js](https://nextjs.org/) (App Router)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **Animations:** [Framer Motion](https://www.framer.com/motion/)
+*   **Game Engine (Traffic Run):** HTML5 `<canvas>` + `requestAnimationFrame`
+*   **Database (Leaderboards):** [Upstash Redis](https://upstash.com/) (Serverless KV)
+*   **Deployment:** [Vercel](https://vercel.com/)

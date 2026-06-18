@@ -3,7 +3,7 @@ import Link from 'next/link';
 import KillTimeLogo from '@/components/KillTimeLogo'; // Adjust path if needed
 
 export const metadata: Metadata = {
-  title: 'KillTime Hub | Addictive Mini-Games',
+  title: 'KillTime',
   description: 'A collection of retro-inspired, fast-paced mini games.',
 };
 
@@ -23,7 +23,7 @@ export default function Home() {
       </p>
 
       {/* Your Games Grid */}
-      <div className="flex-grow flex items-center justify-center p-4">
+      <div className="flex-grow flex items-center justify-center p-4 gap-8">
         <Link href="/traffic-run" className="group block w-full max-w-sm h-64 rounded-xl border-[6px] border-[#334155] shadow-[8px_8px_0px_rgba(0,0,0,0.3)] overflow-hidden relative">
           <div 
             className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
@@ -34,21 +34,17 @@ export default function Home() {
             <p className="text-blue-300 text-sm font-bold mt-1">DODGE THE HIGHWAY</p>
           </div>
         </Link>
+        <Link href="/spend" className="group block w-full max-w-sm h-64 rounded-xl border-[6px] border-[#334155] shadow-[8px_8px_0px_rgba(0,0,0,0.3)] overflow-hidden relative bg-[#1e293b]">
+          <div 
+            className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+            style={{ backgroundImage: "url('/sprites/spend/spend.png')", imageRendering: 'pixelated' }} 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6">
+            <h2 className="text-3xl font-black text-white tracking-widest drop-shadow-md">Spend Elon Musk's Fortune</h2>
+            <p className="text-green-400 text-sm font-bold mt-1">BLOW $1 TRILLION</p>
+          </div>
+        </Link>
       </div>
-
-      <footer className="flex justify-between align-middle p-8 text-center border-t border-gray-300 mt-8 space-y-3">
-        <p className="text-gray-500 text-sm font-medium">
-          Built by{' '}
-          <a href="https://maheshpaul.is-a.dev/" target="_blank" rel="noopener noreferrer" className=" hover:text-[#3b82f6] transition-colors">
-            Mahesh Paul
-          </a>
-        </p>
-        <p>
-          <Link href="/credits" className="text-sm font-medium hover:text-[#3b82f6] hover:underline transition-colors">
-            Credits
-          </Link>
-        </p>
-      </footer>
     </main>
   );
 }
