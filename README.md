@@ -17,7 +17,7 @@
 Currently, KillTime features two highly addictive mini-games:
 
 *   **🚗 Traffic Run:** A fast-paced, 8-bit retro highway dodger built entirely in HTML5 Canvas. Features scaling difficulty, responsive pixel-art UI, audio controls, and a real-time **Global Leaderboard**.
-*   **💸 Spend Elon's Fortune:** A neo-brutalist shopping simulator. Try to blow through a $250,000,000,000 net worth by buying everything from a cup of coffee to the entire GDP of New Zealand.
+*   **💸 Spend Elon's Fortune:** A neo-brutalist shopping simulator. Try to blow through a $1,000,000,000,000 net worth by buying everything from a cup of coffee to the entire GDP of New Zealand.
 
 ## 🛠️ Tech Stack
 
