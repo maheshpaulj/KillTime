@@ -44,6 +44,15 @@ export default function Home() {
             <p className="text-green-400 text-sm font-bold mt-1">BLOW $1 TRILLION</p>
           </div>
         </Link>
+        <Link href="/flappy-bird" className="group block w-full max-w-sm h-64 rounded-xl border-[6px] border-[#334155] shadow-[8px_8px_0px_rgba(0,0,0,0.3)] overflow-hidden relative bg-[#71c5cf]">
+          <div className="absolute inset-0 flex items-center justify-center text-7xl group-hover:-translate-y-4 transition-transform duration-300">
+            🐦
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
+            <h2 className="text-3xl font-black text-white tracking-widest drop-shadow-md">FLAPPY BIRD</h2>
+            <p className="text-yellow-400 text-sm font-bold mt-1">THE FRUSTRATION SIMULATOR</p>
+          </div>
+        </Link>
       </div>
     </main>
   );

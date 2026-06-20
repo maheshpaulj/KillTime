@@ -48,7 +48,7 @@ export default function TrafficGame() {
     setPlayerName(localStorage.getItem('traffic_playerName') || '');
     setPersonalBest(Number(localStorage.getItem('traffic_personalBest') || 0));
 
-    fetch('/api/scores')
+    fetch('/api/traffic-scores')
       .then(res => {
         if (!res.ok) throw new Error("API Route Missing or Failing");
         return res.json();
@@ -477,12 +477,12 @@ export default function TrafficGame() {
     setPlayerName(finalName);
 
     try {
-      await fetch('/api/scores', {
+      await fetch('/api/traffic-scores', {
         method: 'POST',
         body: JSON.stringify({ deviceId: getOrCreateDeviceId(), name: finalName, score: scoreToSubmit, frames: totalFrames }),
         headers: { 'Content-Type': 'application/json' },
       });
-      const res = await fetch('/api/scores');
+      const res = await fetch('/api/traffic-scores');
       if (res.ok) setLeaderboard(await res.json());
     } catch (e) { console.error("Error submitting score", e); }
 
